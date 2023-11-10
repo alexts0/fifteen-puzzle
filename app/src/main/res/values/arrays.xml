@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="Multipliers">
+        <item>3 x 3</item>
+        <item>4 x 4</item>
+        <item>5 x 5</item>
+        <item>6 x 6</item>
+    </array>
+    <array name="Skins">
+        <item>Wood</item>
+        <item>Metal</item>
+    </array>
+    <array name="table_titles">
+        <item>Position</item>
+        <item>Moves</item>
+    </array>
+</resources>

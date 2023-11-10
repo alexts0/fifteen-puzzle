@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:textColor="#fff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/best_scores"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:text="@string/game_mode"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/multiplier"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:contentDescription="@string/multiplier_button_desc"
+            android:src="@drawable/three"
+            android:text="@string/game_mode" />
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/high_score_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" />
+</LinearLayout>
