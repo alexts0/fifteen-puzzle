@@ -1,15 +1,15 @@
 <resources>
     <string name="application_name">Fifteen</string>
     <string name="best_scores">High Scores</string>
-    <string name="congratulation">Congratulation, \n you win with</string>
+    <string name="congratulation">Congratulation, \n you win with %1$d moves!</string>
     <string name="exit">Exit</string>
     <string name="game_mode">Game mode</string>
     <string name="moves">Moves</string>
     <string name="moves_counter">0</string>
-    <string name="moves_made">moves!</string>
-    <string name="multiplier_title">Choose Multiplier</string>
+    <string name="multiplier_title">Select game mode</string>
     <string name="new_game">New Game</string>
     <string name="reset">Reset</string>
+    <string name="sound">Sound</string>
     <string name="resume_game">Resume Game</string>
     <string name="skin">Skin</string>
     <string name="skin_title">Choose Skin</string>
@@ -18,5 +18,5 @@
     <string name="app_name">Fifteen Puzzle</string>
     <string name="title_activity_best_score">BestScore</string>
     <string name="title_activity_game">GameActivity</string>
-    <string name="multiplier_button_desc">Multiplier button</string>
+    <string name="multiplier_button_desc">Choose game mode button</string>
 </resources>

@@ -40,7 +40,7 @@
             android:scaleType="fitCenter"
             android:background="@null"
             android:contentDescription="@string/multiplier_button_desc"
-            android:src="@drawable/three"
+            android:src="@drawable/nine"
             android:text="@string/game_mode" />
     </LinearLayout>
 

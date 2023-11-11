@@ -23,9 +23,10 @@
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:id="@+id/multiplier"
-            android:src="@drawable/four"
+            android:src="@drawable/nine"
             android:background="@null"
-            android:text="@string/game_mode" />
+            android:text="@string/game_mode"
+            android:contentDescription="@string/game_mode"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -38,7 +39,8 @@
             android:id="@+id/skin"
             android:background="@null"
             android:src="@drawable/cell_wood"
-            android:text="@string/skin" />
+            android:text="@string/skin"
+            android:contentDescription="@string/skin"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -51,7 +53,8 @@
             android:id="@+id/reset"
             android:background="@null"
             android:src="@drawable/ic_action_refresh"
-            android:text="@string/reset" />
+            android:text="@string/reset"
+            android:contentDescription="@string/reset"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -64,7 +67,8 @@
             android:id="@+id/sound"
             android:background="@null"
             android:src="@drawable/sound_on"
-            android:text="@string/reset" />
+            android:text="@string/sound"
+            android:contentDescription="@string/sound" />
     </LinearLayout>
 
     <LinearLayout

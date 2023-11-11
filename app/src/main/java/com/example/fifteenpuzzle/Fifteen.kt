@@ -75,11 +75,7 @@ class Fifteen {
     }
 
     private fun getField(): Array<Array<Cell>> {
-        val arr = java.lang.reflect.Array.newInstance(
-            Cell::class.java, *intArrayOf(
-                multiplier, multiplier
-            )
-        ) as Array<Array<Cell>>
+        val arr = Array(multiplier) { Array(multiplier) { Cell(1, 100, 4) }  }
         var cellNumber = 1
         for (i in 0 until multiplier) {
             for (j in 0 until multiplier) {
@@ -301,7 +297,6 @@ class Fifteen {
         delta = getDelta()
         Log.d("ANIM DELTA:", "delta = $delta, cellSize = $cellSize /5 = ${cellSize / 5}")
         currentField = mixField()
-//        currentField = getField()
         moves = 0
         hasAnimation = false
         clickable = true

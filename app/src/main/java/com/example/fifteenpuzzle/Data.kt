@@ -4,22 +4,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 
-class Data(private val context: Context) {
+class Data(context: Context) {
     private val multiplierScores =
         arrayOf("eightScores", "fifteenScores", "twentyFourScores", "thirtyFiveScores")
 
-    // private ArrayList<Integer>[] highScore = new ArrayList[4];
     private val highScore: Array<ArrayList<Int>> =
         Array(multiplierScores.size) { ArrayList() }
-    private var settings: SharedPreferences
+    private val settings: SharedPreferences  = context.getSharedPreferences(MAIN_SETTINGS, 0)
 
     init {
-        settings = context.getSharedPreferences(MAIN_SETTINGS, 0)
         loadHighScore()
     }
-
-    val isItFirstLaunch: Boolean
-        get() = settings.getBoolean(FIRST_LAUNCH, true)
 
     fun hasNotFinishedGame(): Boolean {
         return settings.getBoolean(NOT_FINISHED, false)
@@ -51,13 +46,20 @@ class Data(private val context: Context) {
         saveHighScore()
     }
 
-    var gameWidth: Int
+    var screenWidth: Int
         get() = settings.getInt(SCREEN_SIZE, 0)
+        set(width) {
+            val editor = settings.edit()
+            editor.putInt(SCREEN_SIZE, width)
+            editor.apply()
+        }
+
+    var gameWidth: Int
+        get() = settings.getInt(GAME_BOARD_WIDTH, 0)
         set(width) {
             Log.d("gameWidth is:", "$width")
             val editor = settings.edit()
-            editor.putInt(SCREEN_SIZE, width)
-            editor.putBoolean(FIRST_LAUNCH, false)
+            editor.putInt(GAME_BOARD_WIDTH, width)
             editor.apply()
         }
 
@@ -178,12 +180,12 @@ class Data(private val context: Context) {
 
     companion object {
         const val BEST_SCORE_MULTIPLIER = "BestScoreMultiplier"
-        const val FIRST_LAUNCH = "FirstLaunch"
         const val GAME_FIELD = "GameField"
         const val MAIN_SETTINGS = "FifteenMainSettings"
         const val MOVES_COUNTER = "MovesCounter"
         const val MULTIPLIER = "Multiplier"
         const val NOT_FINISHED = "NotFinishedGame"
+        const val GAME_BOARD_WIDTH = "GameBoardWidth"
         const val SCREEN_SIZE = "ScreenSize"
         const val SKIN = "Skin"
         const val SOUND = "Sound"

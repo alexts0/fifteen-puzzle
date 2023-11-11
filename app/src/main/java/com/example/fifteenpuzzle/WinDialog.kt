@@ -1,9 +1,8 @@
 package com.example.fifteenpuzzle
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
 class WinDialog : DialogFragment() {
-    var mListener: WinDialogListener? = null
+    private lateinit var winDialogListener: WinDialogListener
     private var moves = 0
 
     interface WinDialogListener {
@@ -19,31 +18,34 @@ class WinDialog : DialogFragment() {
         fun onDialogPositiveClick(dialogFragment: DialogFragment?)
     }
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         try {
-            mListener = activity as WinDialogListener
+            winDialogListener = context as WinDialogListener
         } catch (e: ClassCastException) {
-            throw ClassCastException("$activity must implement WinDialogListener")
+            throw ClassCastException("$context must implement WinDialogListener")
         }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val layout: View =
-            requireActivity().getLayoutInflater().inflate(R.layout.windialog, null as ViewGroup?)
-        val tv = layout.findViewById<View>(R.id.win_text) as TextView
-        if (tv != null) {
-            tv.text = moves.toString() + " " + getResources().getString(R.string.moves_made)
+            requireActivity().layoutInflater.inflate(R.layout.windialog, null as ViewGroup?)
+        val winTextView = layout.findViewById<TextView>(R.id.win_text)
+        if (winTextView != null) {
+            winTextView.text = getString(R.string.congratulation, moves)
         }
-        builder.setView(layout).setPositiveButton(R.string.reset,
-            DialogInterface.OnClickListener { dialog, id -> mListener!!.onDialogPositiveClick(this@WinDialog) })
-            .setNegativeButton(R.string.exit,
-                DialogInterface.OnClickListener { dialog, id ->
-                    mListener!!.onDialogNegativeClick(
-                        this@WinDialog
-                    )
-                })
+        builder.setView(layout)
+            .setPositiveButton(
+                R.string.reset
+            ) { _, _ -> winDialogListener.onDialogPositiveClick(this@WinDialog) }
+            .setNegativeButton(
+                R.string.exit
+            ) { _, _ ->
+                winDialogListener.onDialogNegativeClick(
+                    this@WinDialog
+                )
+            }
         return builder.create()
     }
 

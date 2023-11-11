@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import androidx.window.layout.WindowMetricsCalculator
+import kotlin.math.roundToInt
 
 class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
     WinDialog.WinDialogListener {
@@ -31,7 +30,6 @@ class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
     private lateinit var multipliersImages: IntArray
     private lateinit var soundImages: IntArray
 
-    /* access modifiers changed from: protected */
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +49,10 @@ class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
         //images
         skinsImages = intArrayOf(R.drawable.cell_wood, R.drawable.cell_metal)
         multipliersImages = intArrayOf(
-            R.drawable.three,
-            R.drawable.four,
-            R.drawable.five,
-            R.drawable.six
+            R.drawable.nine,
+            R.drawable.fifteen,
+            R.drawable.twentyfour,
+            R.drawable.thirtyfive
         )
         soundImages = intArrayOf(R.drawable.sound_off, R.drawable.sound_on)
 
@@ -65,9 +63,7 @@ class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
         drawView = findViewById(R.id.drawView)
         data = Data(this)
 
-//        if (data.isItFirstLaunch) {
-        screenWidth
-//        }
+        setGameBoardWidth()
         setButtons()
         drawView.init(
             data,
@@ -88,7 +84,6 @@ class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
         setHandlers()
     }
 
-    /* access modifiers changed from: private */
     private fun toggleSound() {
         isSoundOn = !isSoundOn
         val a: Int = if (isSoundOn) 1 else 0
@@ -102,32 +97,16 @@ class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
         soundBtn.setOnClickListener { toggleSound() }
     }
 
-    private val screenWidth: Unit
-        get() {
-//            val metrics = DisplayMetrics()
-//            windowManager.defaultDisplay.getMetrics(metrics)
-//            val width = when (metrics.widthPixels) {
-//                320 -> 300
-//                480 -> 450
-//                720 -> 600
-//                else -> metrics.widthPixels
-//            }
-//            data.gameWidth = width
-            val metrics = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(this)
-            val width = metrics.bounds.width()
-            val height = metrics.bounds.height()
-            val borderWidth = 8
-            val stdOffset = borderWidth * 2
-            val stdRation = 600 / stdOffset
-
-            val params = findViewById<View>(R.id.background).layoutParams
-            data.gameWidth = width - 40
-            background.layoutParams.width = width - 20
-            background.layoutParams.height = width - 20
-            drawView.layoutParams.width = data.gameWidth
-            drawView.layoutParams.height = data.gameWidth
-            Log.w("screenWidth:", "width = $width, height = $height, data.gameWidth = ${data.gameWidth}, layoutParams Width = ${params.width}")
-        }
+    private fun setGameBoardWidth() {
+        val width = data.screenWidth
+        val offset: Float = width / 600.00f
+        val borderWidth = (15  * offset).roundToInt()
+        data.gameWidth = width - borderWidth * 2
+        background.layoutParams.width = width - borderWidth
+        background.layoutParams.height = width - borderWidth
+        drawView.layoutParams.width = data.gameWidth
+        drawView.layoutParams.height = data.gameWidth
+    }
 
     private fun showMultiplierDialog() {
         val title: CharSequence = resources.getString(R.string.multiplier_title)
@@ -171,7 +150,6 @@ class GameActivity : FragmentActivity(), ListDialog.ListDialogInterface,
         }
     }
 
-    /* access modifiers changed from: protected */
     override fun onPause() {
         drawView.saveSettings()
         Log.d("info", "GameActivity paused")

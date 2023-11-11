@@ -7,11 +7,11 @@
         <item>"35"</item>
     </array>
     <array name="Skins">
-        <item>Wood</item>
-        <item>Metal</item>
+        <item>Дерево</item>
+        <item>Металл</item>
     </array>
     <array name="table_titles">
-        <item>Position</item>
-        <item>Moves</item>
+        <item>Позиция</item>
+        <item>Ходы</item>
     </array>
 </resources>

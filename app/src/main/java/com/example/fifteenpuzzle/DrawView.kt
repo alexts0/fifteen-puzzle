@@ -1,5 +1,6 @@
 package com.example.fifteenpuzzle
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -7,6 +8,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.media.SoundPool
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -18,14 +20,14 @@ class DrawView : View {
     private val context: Context
     private val sound = SoundPool.Builder().setMaxStreams(10).build()
     private val audio: IntArray
-    private val handler = Handler()
+    private val handler = Handler(Looper.getMainLooper())
     private lateinit var anim: Runnable
     private lateinit var bitmap: Bitmap
     private lateinit var board: Fifteen
     private lateinit var data: Data
     private lateinit var movesCounter: TextView
     private lateinit var paint: Paint
-    private val resArray = arrayOf<IntArray>(
+    private val resArray = arrayOf(
         intArrayOf(
             R.drawable.eight_wood,
             R.drawable.fifteen_wood,
@@ -44,8 +46,9 @@ class DrawView : View {
     private var skin = 0
     private var width = 0
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (event.action != 0) {
+        if (event.action != MotionEvent.ACTION_DOWN ) {
             return false
         }
         val x = event.x.toInt()
@@ -63,8 +66,7 @@ class DrawView : View {
         movesCounter.text = board.moves.toString()
     }
 
-    /* access modifiers changed from: protected */
-    public override fun onDraw(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas) {
         if (board.hasAnimation) {
             handler.postDelayed(anim, 17)
         } else {
@@ -77,7 +79,6 @@ class DrawView : View {
     }
 
     private fun showWin(canvas: Canvas) {
-//        canvas.drawARGB(TransportMediator.KEYCODE_MEDIA_PAUSE, 0, 0, 0)  //public static final int KEYCODE_MEDIA_PAUSE = 127;
         canvas.drawARGB(127, 0, 0, 0)
         data.addHighScore(board.multiplierIndex, board.moves)
         (context as GameActivity).showWinDialog(board.moves)
@@ -109,7 +110,7 @@ class DrawView : View {
 
     private fun setBitmap() {
         val options = BitmapFactory.Options()
-        options.inScaled = false;
+        options.inScaled = false
         bitmap = BitmapFactory.decodeResource(
             resources,
             resArray[skin][board.multiplierIndex],

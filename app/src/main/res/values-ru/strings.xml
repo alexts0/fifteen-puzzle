@@ -1,0 +1,22 @@
+<resources>
+    <string name="application_name">Пятнашки</string>
+    <string name="best_scores">Результаты</string>
+    <string name="congratulation">Поздравляю, \n Вы выйграли с %1$d ходами!</string>
+    <string name="exit">Выход</string>
+    <string name="game_mode">Режим игры</string>
+    <string name="moves">Ходы</string>
+    <string name="moves_counter">0</string>
+    <string name="multiplier_title">Выберите режим игры</string>
+    <string name="new_game">Новая игра</string>
+    <string name="reset">Заново</string>
+    <string name="sound">Звук</string>
+    <string name="resume_game">Продолжить</string>
+    <string name="skin">Тема</string>
+    <string name="skin_title">Выберите тему</string>
+    <string name="win">Вы выйграли!</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">Пятнашки</string>
+    <string name="title_activity_best_score">BestScore</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="multiplier_button_desc">Choose game mode button</string>
+</resources>

@@ -33,12 +33,12 @@ class BestScoreActivity : FragmentActivity(), ListDialog.ListDialogInterface {
     private fun init() {
         data = Data(this)
         multipliers = resources.getStringArray(R.array.Multipliers)
-        multiplierBtn = findViewById<ImageButton>(R.id.multiplier)
+        multiplierBtn = findViewById(R.id.multiplier)
         multipliersImages = intArrayOf(
-            R.drawable.three,
-            R.drawable.four,
-            R.drawable.five,
-            R.drawable.six
+            R.drawable.nine,
+            R.drawable.fifteen,
+            R.drawable.twentyfour,
+            R.drawable.thirtyfive
         )
         tableLayout = findViewById(R.id.high_score_table)
 
@@ -48,7 +48,7 @@ class BestScoreActivity : FragmentActivity(), ListDialog.ListDialogInterface {
         showHighScores()
     }
 
-    fun showMultiplierDialog() {
+    private fun showMultiplierDialog() {
         val title: CharSequence = resources.getString(R.string.multiplier_title)
         val dialog = ListDialog()
         dialog.setParameters(title, multipliers, R.id.multiplier)
